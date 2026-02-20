@@ -1,0 +1,25 @@
+services:
+  vllm-nvidia:
+    profiles: [nvidia]
+    build: .
+    image: vllm-jina:latest
+    ports: ["8333:8000"]
+    volumes:
+      - ${HF_CACHE:-~/.cache/huggingface}:/root/.cache/huggingface
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+    command: >
+      jinaai/jina-embeddings-v5-text-nano-retrieval
+      --trust-remote-code
+      --host 0.0.0.0
+      --port 8000
+      --gpu-memory-utilization 0.5
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+

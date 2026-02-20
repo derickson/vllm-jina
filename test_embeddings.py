@@ -1,4 +1,4 @@
-#!/home/dave/dev/vllm-test/.venv/bin/python3
+#!/usr/bin/env python3
 """Smoke test for the vLLM Jina Embeddings v5 Nano service."""
 
 import asyncio

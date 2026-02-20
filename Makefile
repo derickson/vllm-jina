@@ -5,8 +5,8 @@ VLLM_MODEL := jinaai/jina-embeddings-v5-text-nano-retrieval
 build:
 	docker compose build
 
-up-nvidia: build
-	docker compose --profile nvidia up -d
+up: build
+	docker compose up -d
 
 down:
 	docker compose down

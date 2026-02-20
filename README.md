@@ -82,3 +82,26 @@ HF_CACHE=/path/to/cache make up-nvidia
 ├── test_embeddings.py      # Test script
 └── test_texts.txt          # Generated test corpus (git-ignored)
 ```
+
+
+# Registering with Elasticsearch inference API
+
+```json
+PUT /_inference/text_embedding/smaug-jina-embeddings-v5
+{
+    "service": "openai",
+    "service_settings": {
+        "url": "http://<YOUR HOSTNAME>:8333/v1/embeddings",
+        "api_key": "ignored",
+        "model_id": "jinaai/jina-embeddings-v5-text-nano-retrieval",
+        "similarity": "cosine"
+    }
+}
+```
+
+```json
+POST /_inference/text_embedding/smaug-jina-embeddings-v5
+{
+    "input": "hello world"
+}
+```

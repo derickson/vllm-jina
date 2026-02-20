@@ -1,6 +1,5 @@
 services:
   vllm-nvidia:
-    profiles: [nvidia]
     build: .
     image: vllm-jina:latest
     ports: ["8333:8000"]

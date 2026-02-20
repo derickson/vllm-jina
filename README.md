@@ -1,6 +1,6 @@
-# vLLM Jina Embeddings Benchmark
+# vLLM Jina Embeddings v5
 
-Benchmark and smoke-test suite for [Jina Embeddings v5 Nano](https://huggingface.co/jinaai/jina-embeddings-v5-text-nano-retrieval) served by [vLLM](https://docs.vllm.ai/).
+Local development setup for running [Jina Embeddings v5 Nano](https://huggingface.co/jinaai/jina-embeddings-v5-text-nano-retrieval) on [vLLM](https://docs.vllm.ai/).
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ make test
 | `pull`       | Pull latest base images                                |
 | `setup`      | Create `.venv/` and install Python dependencies        |
 | `generate`   | Pre-generate `test_texts.txt` (100k lines, ~207 MB)   |
-| `test`       | Run the full test suite against the running server     |
+| `test`       | Run the test suite against the running server          |
 
 ## Test Suite
 
@@ -49,26 +49,6 @@ The test script (`test_embeddings.py`) runs four tests against the OpenAI-compat
 | 4 | Async batch throughput — 1,000 batches of 100 texts with 4 concurrent async workers |
 
 Test 4 reads from a pre-generated corpus (`test_texts.txt`) so results are reproducible across runs. The file is created automatically on the first run or explicitly with `make generate`.
-
-A statistics summary is printed at the end:
-
-```
-============================================================
-  TEST STATISTICS
-============================================================
-  Model:              jinaai/jina-embeddings-v5-text-nano-retrieval
-  Endpoint:           http://0.0.0.0:8333/v1/embeddings
-  Async workers:      4
-  Batch size:         100
-  Number of batches:  1000
-  Total texts:        100,000
-  Texts file:         /path/to/test_texts.txt
-  Total wall time:    123.4s
-  Batch test time:    120.1s
-  Embeddings/sec:     832.6
-  Tests passed:       4/4
-============================================================
-```
 
 ## Configuration
 
@@ -99,6 +79,6 @@ HF_CACHE=/path/to/cache make up-nvidia
 ├── README.md
 ├── compose.yml             # Docker Compose (nvidia profile)
 ├── requirements.txt        # Python dependencies (aiohttp, requests)
-├── test_embeddings.py      # Test + benchmark script
+├── test_embeddings.py      # Test script
 └── test_texts.txt          # Generated test corpus (git-ignored)
 ```
